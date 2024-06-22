@@ -81,7 +81,7 @@ export default function MyDatePicker() {
       >
         <View style={styles.modalView}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>I have been added to the 6:00am course: {date.toDateString()}</Text>
+            <Text style={styles.modalText}>You have been added to the 6:00am course: {date.toDateString()}</Text>
             <TouchableOpacity
               style={styles.closeButton}
               onPress={() => setModalVisible(!modalVisible)}
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   images: {
-    width: 180,
-    height: 180,
+    width: 140,
+    height: 140,
     marginTop: 20,
     opacity: 0.8, // Adjust opacity as needed
   },

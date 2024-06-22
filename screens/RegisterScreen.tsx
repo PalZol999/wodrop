@@ -4,18 +4,23 @@ import { useFonts, Pacifico_400Regular } from '@expo-google-fonts/pacifico';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios';
 
-interface LogData {
-    email: string;
-    password: string;
-  }
+interface RegData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
-
-const LoginScreen = ({ navigation }: any) => {
+const RegisterScreen = ({ navigation }: any) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (): void => {
-    const user: LogData = {
+  const handleRegister = (): void => {
+    const user: RegData = {
+      firstName,
+      lastName,
       email,
       password,
     };
@@ -44,7 +49,19 @@ const LoginScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome Back (...Squat)</Text>
+      <Text style={styles.title}>Welcome!</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -59,17 +76,8 @@ const LoginScreen = ({ navigation }: any) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          console.log('Register button pressed');
-          navigation.navigate('Register');
-        }}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;
 
 
 /*
