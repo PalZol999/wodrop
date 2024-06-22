@@ -17,7 +17,12 @@ const LoginScreen = ({ navigation }: any) => {
 
     console.log('Attempting to log in with:', user);
 
-    axios.post('http://192.168.0.60:3000/login', user)
+    axios.post('http://192.168.0.60:3000/login', user, {
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
+   
       .then(response => {
         console.log('Login successful:', response.data);
         Alert.alert('Success', 'Login successful!');

@@ -19,9 +19,6 @@ export default function Navigation() {
         headerBackTitle: 'Login',
       }}/>
         <Stack.Screen name="DateToPick" component={DateTime} options={{ headerShown: false }} />
-
-          
-      
       </Stack.Navigator>
     </NavigationContainer>
   );
