@@ -3,12 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'reac
 import { useFonts, Pacifico_400Regular } from '@expo-google-fonts/pacifico';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios';
-
-interface LogData {
-    email: string;
-    password: string;
-  }
-
+import { LogData } from '../component/Interface';
 
 const LoginScreen = ({ navigation }: any) => {
   const [email, setEmail] = useState('');
@@ -22,15 +17,15 @@ const LoginScreen = ({ navigation }: any) => {
 
     console.log('Attempting to log in with:', user);
 
-    axios.post('http://192.168.60:3000/register', user)
+    axios.post('http://192.168.0.60:3000/login', user)
       .then(response => {
         console.log('Login successful:', response.data);
-        Alert.alert('Success', 'Registration successful!');
+        Alert.alert('Success', 'Login successful!');
         navigation.navigate('DateToPick'); // Navigate to the DateToPick screen on success
       })
       .catch(error => {
         console.error('Login error:', error);
-        Alert.alert('Error', 'Registration failed: ' + error.message);
+        Alert.alert('Error', 'Login failed: ' + error.message);
       });
   };
 
@@ -115,14 +110,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
-
-
-/*
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('DateToPick');
-    }, 4000);
-
-    return () => clearTimeout(timer); // Clean up the timer on unmount
-  }, [navigation]);
-*/

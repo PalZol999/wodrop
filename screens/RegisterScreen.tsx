@@ -1,23 +1,40 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useFonts, Pacifico_400Regular } from '@expo-google-fonts/pacifico';
+import { validateEmail, validatePassword } from '../component/Validation';
 import AppLoading from 'expo-app-loading';
 import axios from 'axios';
-
-interface RegData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+import { RegData } from '../component/Interface';
 
 const RegisterScreen = ({ navigation }: any) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleRegister = (): void => {
+    let valid = true;
+
+    if (!validateEmail(email)) {
+      setEmailError('The email address must contain "@"');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError('The password must be at least 6 characters long and contain a number');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    if (!valid) {
+      return;
+    }
+
     const user: RegData = {
       firstName,
       lastName,
@@ -25,16 +42,16 @@ const RegisterScreen = ({ navigation }: any) => {
       password,
     };
 
-    console.log('Attempting to log in with:', user);
+    console.log('Attempting to register with:', user);
 
-    axios.post('http://192.168.60:3000/register', user)
+    axios.post('http://192.168.0.60:3000/register', user)
       .then(response => {
-        console.log('Login successful:', response.data);
+        console.log('Registration successful:', response.data);
         Alert.alert('Success', 'Registration successful!');
         navigation.navigate('DateToPick'); // Navigate to the DateToPick screen on success
       })
       .catch(error => {
-        console.error('Login error:', error);
+        console.error('Registration error:', error);
         Alert.alert('Error', 'Registration failed: ' + error.message);
       });
   };
@@ -69,6 +86,7 @@ const RegisterScreen = ({ navigation }: any) => {
         onChangeText={setEmail}
         keyboardType="email-address"
       />
+      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -76,6 +94,7 @@ const RegisterScreen = ({ navigation }: any) => {
         onChangeText={setPassword}
         secureTextEntry
       />
+      {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
@@ -108,6 +127,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: 'white',
   },
+  errorText: {
+    color: 'red',
+    alignSelf: 'flex-start',
+    marginLeft: 8,
+  },
   button: {
     width: '100%',
     padding: 16,
@@ -123,14 +147,3 @@ const styles = StyleSheet.create({
 });
 
 export default RegisterScreen;
-
-
-/*
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('DateToPick');
-    }, 4000);
-
-    return () => clearTimeout(timer); // Clean up the timer on unmount
-  }, [navigation]);
-*/

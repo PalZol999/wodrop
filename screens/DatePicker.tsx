@@ -5,6 +5,7 @@ import HeaderImage from '../assets/DateImage1.jpg';
 import CoachImage from '../assets/coach.jpeg';
 import nodate from '../assets/banana.png';
 import { StatusBar } from 'react-native';
+import Header from '../component/Header';
 
 export default function MyDatePicker() {
   const [date, setDate] = useState(new Date());
@@ -30,9 +31,20 @@ export default function MyDatePicker() {
     setModalVisible(true);
   };
 
+  const handleLogout = () => {
+    // Handle logout logic here
+    alert('Logout pressed');
+  };
+
+  const handleProfile = () => {
+    // Handle profile logic here
+    alert('Profile pressed');
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
+      <Header onLogout={handleLogout} onProfile={handleProfile} />
       <Image
         source={HeaderImage}
         style={styles.image}
