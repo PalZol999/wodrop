@@ -13,7 +13,7 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Loading">
-     
+
         <Stack.Screen
           name="DateToPick"
           component={DateTime}
@@ -40,7 +40,7 @@ export default function Navigation() {
 
 /* initialRouteName="Loading" will be the 1st screen visible
 
-        <Stack.Screen name="Loading" component={Loading} options={{ headerShown: false }} />
+    <Stack.Screen name="Loading" component={Loading} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
     
