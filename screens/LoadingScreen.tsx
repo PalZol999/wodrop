@@ -58,7 +58,7 @@ export default function Loading({ navigation }: Props) {
 
     // Navigate to the login page after 3 seconds
     const timer = setTimeout(() => {
-      navigation.navigate('Login');
+      navigation.navigate('LoginScreen');
     }, 3500);
 
     // Clear the timer on unmount

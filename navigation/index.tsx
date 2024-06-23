@@ -12,13 +12,15 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Loading">
-      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-      <Stack.Screen name="Register" component={Register} 
-      options={{ 
+  
+      <Stack.Screen name="Loading" component={Loading} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={Register} options={{ 
         title: 'Login', 
         headerBackTitle: 'Login',
       }}/>
+        <Stack.Screen name="LoginScreen" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="DateToPick" component={DateTime} options={{ headerShown: false }} />
+ 
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -28,12 +30,11 @@ export default function Navigation() {
 /* initialRouteName="Loading" will be the 1st screen visible
 
         <Stack.Screen name="Loading" component={Loading} options={{ headerShown: false }} />
-          <Stack.Screen name="Register" component={Register} 
-      options={{ 
+          <Stack.Screen name="Register" component={Register} options={{ 
         title: 'Login', 
         headerBackTitle: 'Login',
       }}/>
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="LoginScreen" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="DateToPick" component={DateTime} options={{ headerShown: false }} />
     
 

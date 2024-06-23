@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, View, Platform, Image, StyleSheet, Text, Modal } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import HeaderImage from '../assets/DateImage1.jpg';
 import CoachImage from '../assets/coach.jpeg';
 import nodate from '../assets/banana.png';
 import { StatusBar } from 'react-native';
 import Header from '../component/Header';
+import { RootStackParamList } from '../navigation/types';
+
+type MyDatePickerNavigationProp = StackNavigationProp<RootStackParamList, 'MyDatePicker'>;
 
 export default function MyDatePicker() {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation<MyDatePickerNavigationProp>();
 
   const onChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
@@ -32,8 +38,7 @@ export default function MyDatePicker() {
   };
 
   const handleLogout = () => {
-    // Handle logout logic here
-    alert('Logout pressed');
+    navigation.navigate('LoginScreen');
   };
 
   const handleProfile = () => {
